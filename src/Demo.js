@@ -21,7 +21,6 @@ $(function () {
   });
 
   $("#taskList").on("change", ":checkbox", function () {
-    // all related code goes in here
     if ($(this).is(":checked")) {
       $(this)
         .closest('li')

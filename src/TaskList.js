@@ -26,6 +26,7 @@ TaskList.prototype.render = function () {
   return $('<ul>').append($tasks);
 };
 
+
 TaskList.prototype.toJSON = function () {
   var jsonString = {
     id: this.id,
@@ -61,6 +62,18 @@ TaskList.prototype.save = function () {
   });
 };
 
+// TaskList.prototype.shuffle = function () {
+//   var tasksArray = this.tasks;
+//   var i;
+//   for (i = 0; i < this.tasks.length; i += 1) {
+//     var checked = tasksArray[i].done;
+
+//     if (checked) {
+//       // tasksArray[i].appendTo("#taskList ul")
+//     }
+//   }
+// };
+
 /*
  * Loads the given tasklist from the server.
  */
@@ -74,5 +87,7 @@ TaskList.load = function (id, callback) {
     });
     taskList.title = returnedData.title;
     callback(taskList);
+    // taskList.shuffle();
+
   });
 };
