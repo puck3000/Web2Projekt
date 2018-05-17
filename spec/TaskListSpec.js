@@ -28,42 +28,97 @@ describe("TaskList", function () {
     });
   });
 
+  // describe("load", function () {
+  //   var result;
+
+  //   beforeEach(function () {
+  //     // mock the ajax call to the server loading the tasklist
+
+  //     spyOn($, "getJSON").and.callFake(function (url, callback) {
+  //       callback({
+  //         id: 'demolista',
+  //         title: 'the demolisteur',
+  //         tasks: [{
+  //             title: 'first task',
+  //             done: true
+  //           },
+  //           {
+  //             title: 'last task',
+  //             done: false
+  //           }
+  //         ]
+  //       });
+  //     });
+  //     // mock ajax call and populate tasklist into result
+  //     TaskList.load('testlist', function (tasklist) {
+  //       result = taskList;
+  //     });
+  //   });
+
+  //   it('calls getJSON with the correct URL', function () {
+  //     expect($.getJSON).toHaveBeenCalledWith("http://zhaw.herokuapp.com/task_lists/testlist", jasmine.any(Function));
+  //   });
+
+  //   it("stores the id of the tasklist", function () {
+  //     expect(result.id).toEqual('demolista');
+  //   });
+  //   it("stores the title of the tasklist", function () {
+  //     expect(result.title).toEqual('the demolisteur');
+  //   });
+
+  //   it("creates a tasklist with 2 entries", function () {
+  //     expect(result.tasks.length).toEqual(2);
+  //   });
+
+  //   it("populates the titles of the tasklist", function () {
+  //     expect(result.tasks[0].title).toEqual('first task');
+  //     expect(result.tasks[1].title).toEqual('last task');
+  //   });
+
+  //   it("populates the done status of the tasks", function () {
+  //     expect(result.tasks[0].done).toBe(true);
+  //     expect(result.tasks[1].done).toBe(false);
+  //   });
+
+  // });
+
   describe("load", function () {
+
     var result;
 
     beforeEach(function () {
       // mock the ajax call to the server loading the tasklist
-
-      spyOn($, "getJSON").and.callFAake(function (url, callback) {
+      spyOn($, "getJSON").and.callFake(function (url, callback) {
         callback({
-          id: 'demolista',
-          title: 'the demolisteur',
+          id: 'demo-list',
+          title: 'the list',
           tasks: [{
               title: 'first task',
               done: true
             },
             {
-              title: 'last task',
+              title: '2nd task',
               done: false
-            }
+            },
           ]
         });
       });
-      // mock ajax call and populate tasklist into result
-      TaskList.load('testlist', function (tasklist) {
+
+      // execute a mocked ajax call and populate tasklist into result
+      TaskList.load('testlist', function (taskList) {
         result = taskList;
       });
     });
 
     it('calls getJSON with the correct URL', function () {
-      expect($.getJSON).toHAveBeenCalledWith("http://zhaw.herokuapp.com/task_lists/testlist", jasmine.any(Function));
+      expect($.getJSON).toHaveBeenCalledWith("http://zhaw.herokuapp.com/task_lists/testlist", jasmine.any(Function));
     });
 
     it("stores the id of the tasklist", function () {
-      expect(result.id).toEqual('demolista');
+      expect(result.id).toEqual('demo-list');
     });
     it("stores the title of the tasklist", function () {
-      expect(result.title).toEqual('the demolisteur');
+      expect(result.title).toEqual('the list');
     });
 
     it("creates a tasklist with 2 entries", function () {
@@ -72,15 +127,15 @@ describe("TaskList", function () {
 
     it("populates the titles of the tasklist", function () {
       expect(result.tasks[0].title).toEqual('first task');
-      expect(result.tasks[1].title).toEqual('last task');
+      expect(result.tasks[1].title).toEqual('2nd task');
     });
 
     it("populates the done status of the tasks", function () {
       expect(result.tasks[0].done).toBe(true);
       expect(result.tasks[1].done).toBe(false);
     });
-
   });
+
   describe("save (new list)", function () {
     beforeEach(function () {
       taskList.id = undefined;
@@ -159,6 +214,4 @@ describe("TaskList", function () {
       expect(window.location.hash).toEqual('#0815');
     });
   });
-
-
 });
