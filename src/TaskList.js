@@ -25,3 +25,19 @@ TaskList.prototype.render = function () {
 
   return $('<ul>').append($tasks);
 }
+
+/*
+ * Loads the given tasklist from the server.
+ */
+TaskList.load = function (id, callback) {
+  var taskList = new TaskList();
+  $.getJSON('http://zhaw.herokuapp.com/task_lists/' + id, function (returnedData) {
+    taskList.id = returnedData.id;
+    $.each(returnedData.tasks, function (index, task) {
+      var t = taskList.createTask(task.title);
+      t.done = task.done;
+    });
+    taskList.title = returnedData.title;
+    callback(taskList);
+  });
+}
