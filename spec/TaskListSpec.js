@@ -209,9 +209,5 @@ describe("TaskList", function () {
     it("consumes the id received by the server", function () {
       expect(taskList.id).toEqual('0815');
     });
-    // optional exercise
-    xit("sets the hash", function () {
-      expect(window.location.hash).toEqual('#0815');
-    });
   });
 });
